@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Mvc.Models.MvcCustomerModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="padding-bottom:60px;">
+
+</div>
+
+<p>
+    <a href="@Url.Action("AddOrEdit","Customermvc")" class="btn-success">Insert Customer</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SendArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostalCode)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SendArea)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostalCode)
+        </td>
+        <td style="display: flex;">
+            <div>
+                <a href="@Url.Action("AddOrEdit","Customermvc", new {id= item.CustomerID})">Edit</a>
+            </div>
+            <div>
+                <a onclick="Delete(@item.CustomerID)" class="btn-danger">Delete</a>
+            </div>
+
+        </td>
+    </tr>
+}
+
+</table>
+
+@section scripts{
+    <script>
+        $(function () {
+            var successmessage = '@TempData["SuccessMessage"]'
+            if (successmessage != '') {
+                alertify.success(successmessage);
+            }
+        });
+
+        function Delete(id) {
+            alertify.confirm('Delete', 'Are you Want To Delete?', function () {
+                window.location.href = '@Url.Action("Delete", "Customermvc")/' + id;
+            }, null);
+        }
+    </script>
+    }

@@ -1,0 +1,40 @@
+﻿@model Mvc.Models.MvcCustomerModel
+@{
+    ViewBag.Title = "AddOrEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddOrEdit</h2>
+
+<div class="form-body">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.CustomerID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerName)
+            @Html.EditorFor(model => model.CustomerName)
+            @Html.ValidationMessageFor(model => model.CustomerName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SendArea)
+            @Html.EditorFor(model => model.SendArea)
+            @Html.ValidationMessageFor(model => model.SendArea)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PostalCode)
+            @Html.EditorFor(model => model.PostalCode)
+            @Html.ValidationMessageFor(model => model.PostalCode)
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn-default" />
+        </div>
+    }
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
+    }
